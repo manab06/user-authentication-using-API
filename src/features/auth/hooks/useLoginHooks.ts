@@ -31,7 +31,7 @@ export  function useLoginHooks() {
             const loginResponse = await loginUser(data);
             useAuthStore.getState().setToken(loginResponse.access_token)
             const user = await getProfile();
-            setLogin(user.name,user.email,user.avatar,loginResponse.access_token,loginResponse.refresh_token);
+            setLogin(user.id,user.name,user.email,user.avatar,loginResponse.access_token,loginResponse.refresh_token);
             navigate(ROUTES.PRIVATE.DASHBOARD);
         }   catch(error){
             console.log(error)

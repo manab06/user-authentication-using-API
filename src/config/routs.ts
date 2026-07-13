@@ -7,6 +7,7 @@ export const ROUTES = {
     },
     PRIVATE: {
         DASHBOARD:'/dashboard',
+        DELETE_ACCOUNT:'/delete-account',
 
     },
 

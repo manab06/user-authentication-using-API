@@ -32,3 +32,16 @@ export interface DeleteUserResponse {
   role:string;
   avatar:string;
 }
+
+export interface DeleteAccountModal {
+  id:number|string;
+  isOpen: boolean;
+  title: string;
+  message: string;
+  confirmText: string;
+  cancelText: string;
+  onClose: () => void;
+  onConfirm: () => void;
+}
+
+

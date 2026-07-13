@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 
 
 interface AuthState {
+    id: number      | null;
     name: string    | null;
     email: string   | null;
     password:string | null;
@@ -10,19 +11,21 @@ interface AuthState {
     avatar:string   | null;
     isAuthenticated:boolean;
     refreshToken:string | null;
-    setAuth:(name:string,email:string,password:string,avatar:string) => void;
-    
+    setAuth:(id:number,name:string,email:string,password:string,avatar:string) => void;
+    setId:(id: number) => void;
     setToken:(token:string)=>void;
 
     logout: ()=>void;
 
     setUser:(
+        id: number,
         name:string,
         email:string,
         avatar:string
     ) => void
 
     setLogin: (
+        id: number,
         name:string,
         email:string,
         avatar:string,
@@ -35,6 +38,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
     persist(
         (set)=> ({
+            id:null,
             token:null,
             refreshToken:null,
             name:null,
@@ -47,10 +51,11 @@ export const useAuthStore = create<AuthState>()(
                 token,
                 isAuthenticated:true,
             }),
-            setAuth:(name :string,email:string,password:string,avatar:string)=> set({name,email,password,avatar}),
+            setAuth:(id:number,name :string,email:string,password:string,avatar:string)=> set({id,name,email,password,avatar}),
+            setId:(id: number) => set({id}),
             logout: ()=> set({token:null,name:null,email:null,password:null,avatar:null,isAuthenticated:false}),
-            setUser:(name :string,email:string,avatar:string)=> set({name,email,avatar}),
-            setLogin:(name,email,avatar,accessToken,refreshToken)=>set({name,email,avatar,token:accessToken,refreshToken,isAuthenticated:true})
+            setUser:(id: number,name :string,email:string,avatar:string)=> set({id,name,email,avatar}),
+            setLogin:(id,name,email,avatar,accessToken,refreshToken)=>set({id,name,email,avatar,token:accessToken,refreshToken,isAuthenticated:true})
         }),
         {
             name: 'auth-storage'
