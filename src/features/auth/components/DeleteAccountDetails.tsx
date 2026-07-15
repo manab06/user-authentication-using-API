@@ -8,6 +8,7 @@ import { useDelete } from '../hooks/useDelete.ts';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../config/routs.ts';
 import { useRedirectToHomepage } from '../hooks/useRedirectToHomepage.ts';
+import { toast } from 'react-toastify';
 
 interface DeleteAccountDetailsProps {
      isOpen: boolean;
@@ -23,37 +24,59 @@ export function DeleteAccountDetails({isOpen, onDeleted, onClose }:DeleteAccount
     const [error, setError] = useState("");
     
 
-    const  onConfirm = async ()=>{
-        setIsDeleting(true);
-        setError("");
-        try{
+    // const  onConfirm = async ()=>{
+    //     setIsDeleting(true);
+    //     setError("");
+    //     try{
 
-            await onSubmitDelete();
-            onDeleted?.();
-            onClose();
-        }catch(error){
-            setError("Failded to delete account. Please try again");
-        }finally {
-            setIsDeleting(false);
-        }
+    //         await onSubmitDelete();
+    //         onDeleted?.();
+    //         onClose();
+    //         toast.success("Account deleted successfully!");
+    //     }catch(error){
+    //         setError("Failded to delete account. Please try again");
+    //         toast.error("Failed to delete account. Please try again.");
+    //     }finally {
+    //         setIsDeleting(false);
+    //     }
         
 
-    };
+    // };
 
-    // useEffect(()=>{
-    //     const timer = setTimeout(()=>{
-    //         navigate(ROUTES.PUBLIC.LOGIN);
+    // // useEffect(()=>{
+    // //     const timer = setTimeout(()=>{
+    // //         navigate(ROUTES.PUBLIC.LOGIN);
 
-    //     },3000);
+    // //     },3000);
         
 
-    //     return ()=> clearTimeout(timer);
+    // //     return ()=> clearTimeout(timer);
 
-    // },[navigate]);
+    // // },[navigate]);
 
-    useRedirectToHomepage()
+    // useRedirectToHomepage()
     
+const onConfirm = async () => {
+  setIsDeleting(true);
+  setError("");
 
+  try {
+    await onSubmitDelete();
+
+    toast.success("Account deleted successfully!");
+
+    onDeleted?.();
+    onClose();
+
+    navigate(ROUTES.PUBLIC.LOGIN);
+
+  } catch (error) {
+    setError("Failed to delete account.");
+    toast.error("Failed to delete account.");
+  } finally {
+    setIsDeleting(false);
+  }
+};
 
 
     return (

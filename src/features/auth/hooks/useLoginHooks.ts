@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authDataForLogIn, AuthDataForLogin } from '../schema/login/logisSchema';
 import { useAuthStore } from "../store/store";
-
+import {  toast } from 'react-toastify';
 import { loginUser } from "../API/loginApi";
 import { getProfile } from "../API/getProfile";
 
@@ -24,6 +24,7 @@ export  function useLoginHooks() {
 
     const backToRegisterpage = () => {
         navigate(ROUTES.PUBLIC.HOME);
+        // toast.error("Please register first");
     };
 
     const onSubmitLogin = async (data: AuthDataForLogin) => {
@@ -33,7 +34,9 @@ export  function useLoginHooks() {
             const user = await getProfile();
             setLogin(user.id,user.name,user.email,user.avatar,loginResponse.access_token,loginResponse.refresh_token);
             navigate(ROUTES.PRIVATE.DASHBOARD);
+            toast.success("Login successful");
         }   catch(error){
+            toast.error("Login failed");
             console.log(error)
         }
     }; 

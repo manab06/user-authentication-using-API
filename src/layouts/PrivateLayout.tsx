@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../features/auth/store/store";
 import { ROUTES } from "../config/routs";
+import { toast } from "react-toastify";
 
 export const PrivateLayout = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export const PrivateLayout = () => {
   const handleLogout = () => {
     logout();
     navigate(ROUTES.PUBLIC.LOGIN);
+    toast.success("Logged out successfully!");
   };
 
   return (

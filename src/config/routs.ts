@@ -4,6 +4,8 @@ export const ROUTES = {
         // REGISTER: '/register',
         SUCCESS:'/success',
         LOGIN:'/login',
+        CONTACT:'/contact',
+        ABOUT:'/about',
     },
     PRIVATE: {
         DASHBOARD:'/dashboard',
