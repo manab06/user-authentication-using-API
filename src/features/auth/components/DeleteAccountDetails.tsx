@@ -7,7 +7,7 @@ import { any } from 'zod';
 import { useDelete } from '../hooks/useDelete.ts';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../config/routs.ts';
-import { useRedirectToHomepage } from '../hooks/useRedirectToHomepage.ts';
+// import { useRedirectToHomepage } from '../hooks/useRedirectToHomepage.ts';
 import { toast } from 'react-toastify';
 
 interface DeleteAccountDetailsProps {

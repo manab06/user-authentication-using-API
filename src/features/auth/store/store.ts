@@ -46,7 +46,6 @@ export const useAuthStore = create<AuthState>()(
             avatar:null,
             password:null,
             isAuthenticated: false,
-            
             setToken:(token)=>set({
                 token,
                 isAuthenticated:true,

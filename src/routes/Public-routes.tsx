@@ -10,6 +10,7 @@ import { DashBoardPage } from "../pages/DashBordPage/DashBoardPage";
 import { LoginPage } from '../pages/login/LoginPage';
 import ContactPage from "../pages/ContactPage";
 import AboutUsPages from "../pages/AboutUsPages";
+import { AdminPage } from "../pages/AdminPage";
 
 
 
@@ -39,6 +40,10 @@ export const publicRoutes: RouteObject[] = [
         element:<AboutUsPages/>
 
       },
+      {
+        path: "admin",
+        element: <AdminPage />
+      }
     ],
   },
 ];

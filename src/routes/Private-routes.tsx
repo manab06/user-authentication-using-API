@@ -5,6 +5,8 @@ import { ROUTES } from '../config/routs';
 import { PrivateLayout } from '../layouts/PrivateLayout';
 import { DashBoardPage } from '../pages/DashBordPage/DashBoardPage';
 import {DeleteAccountPage} from '../pages/DeleteAccountPage';
+import AdminDashBoard from '../features/auth/components/AdminDashBoard';
+
 
 export const AuthenticGuard=()=> {
 
@@ -28,7 +30,11 @@ export const Privateroutes = [
                 children: [
                     {path:"dashboard", element:<DashBoardPage/>},
                     {path: '*', element:<Navigate to={ROUTES.PRIVATE.DASHBOARD}/>},
-                    {path:"delete-account", element:<DeleteAccountPage/>}
+                    {path:"delete-account", element:<DeleteAccountPage/>},
+                    {path:"adashboard", element:<AdminDashBoard/>
+
+                    }
+                    
                 ]
             }
         ]
