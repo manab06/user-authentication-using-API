@@ -68,7 +68,7 @@ const onConfirm = async () => {
     onDeleted?.();
     onClose();
 
-    navigate(ROUTES.PUBLIC.LOGIN);
+    navigate(ROUTES.PUBLIC.LOGIN,{replace:true});
 
   } catch (error) {
     setError("Failed to delete account.");

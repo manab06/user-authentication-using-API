@@ -305,6 +305,9 @@ export function MainLayout() {
 
       {/* ================= Navbar ================= */}
       <header className="sticky top-4 z-50 px-6">
+        <div className="bg-white text-black dark:bg-slate-900 dark:text-white">
+          
+        </div>
         <div className="max-w-7xl mx-auto rounded-2xl bg-white/75 backdrop-blur-xl border border-white/50 shadow-xl">
           <div className="h-20 px-8 flex items-center justify-between">
 
@@ -334,8 +337,9 @@ export function MainLayout() {
               {[
                 { name: "Home", link: "/" },
                 { name: "About Us", link: ROUTES.PUBLIC.ABOUT },
-                { name: "Features", link: "/features" },
+                { name: "products", link: "/products" },
                 { name: "Contact", link: ROUTES.PUBLIC.CONTACT },
+                { name: "Admin", link: ROUTES.ADMIN_PUBLIC.LOGIN },
               ].map((item) => (
                 <Link
                   key={item.name}
@@ -365,6 +369,13 @@ export function MainLayout() {
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 text-white shadow-lg hover:shadow-cyan-400/50 hover:-translate-y-1 transition-all duration-300"
               >
                 Register
+              </Link>
+
+               <Link
+                to={ROUTES.ADMIN_PUBLIC.LOGIN}
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 text-white shadow-lg hover:shadow-cyan-400/50 hover:-translate-y-1 transition-all duration-300"
+              >
+                Admin Login
               </Link>
 
             </div>
@@ -426,8 +437,8 @@ export function MainLayout() {
               </li>
 
               <li>
-                <Link className="hover:text-sky-400 transition hover:translate-x-2 inline-block" to="/features">
-                  Features
+                <Link className="hover:text-sky-400 transition hover:translate-x-2 inline-block" to={ROUTES.PUBLIC.PRODUCT}>
+                  Products
                 </Link>
               </li>
 

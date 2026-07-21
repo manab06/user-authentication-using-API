@@ -9,15 +9,25 @@ export const apiClient = axios.create({
     }
 });
 
+export const apiClientForContactPage = axios.create ({
+    baseURL: "https://api.escuelajs.co/api/v1",
+    headers: {
+         "Content-Type" : "application/json"
+    }
+})
+
+export const apiClientForGetProductDetails = axios.create ({
+    baseURL:"https://api.escuelajs.co/api/v1",
+    headers: {
+         "Content-Type" : "application/json"
+    }
+})
+
 const token = localStorage.getItem("access_token");
 
 apiClient.interceptors.request.use(
     (config)=>{
         const token = useAuthStore.getState().token;
-
-    // console.log("===== REQUEST =====");
-    // console.log("URL:", config.url);
-    // console.log("Token:", token);
 
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;

@@ -45,10 +45,15 @@ export interface DeleteAccountModal {
 }
 
 
-export interface contactFormData {
-  name: string;
-  email: string;
-  message: string;
-  avatar?: string;
+export interface contactFormDataType {
+  
+    id:number;
+    email: string;
+    password: string;
+    name: string;
+    role: string;
+    avatar: string;
+    creationAt: string;
+    updatedAt: string;
 }
 

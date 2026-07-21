@@ -11,6 +11,10 @@ import { LoginPage } from '../pages/login/LoginPage';
 import ContactPage from "../pages/ContactPage";
 import AboutUsPages from "../pages/AboutUsPages";
 import { AdminPage } from "../pages/AdminPage";
+import AdminLoginComponent from "../features/auth/components/AdminLoginComponent";
+import { ProductPage } from "../pages/ProductPage";
+import CartComponent from "../features/auth/components/CartComponent";
+import { LazyLodingForProductPage } from "../features/auth/components/LazyLodingForProductPage";
 
 
 
@@ -40,10 +44,19 @@ export const publicRoutes: RouteObject[] = [
         element:<AboutUsPages/>
 
       },
+      { 
+        path: "alogin",
+        element: <AdminLoginComponent />
+      },
       {
-        path: "admin",
-        element: <AdminPage />
-      }
+        path:"products",
+        element: <LazyLodingForProductPage/>
+      },
+      {
+        path:"cart",
+        element:<CartComponent/>
+
+      },
     ],
   },
 ];

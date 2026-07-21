@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../../../config/routs'
 
 function AboutUsComponent() {
     return (
@@ -171,10 +173,11 @@ function AboutUsComponent() {
             Have an idea or want to know more about our services? We'd love to
             hear from you.
           </p>
-
+          <Link to={ROUTES.PUBLIC.CONTACT}>
           <button className="mt-8 bg-white text-cyan-600 px-8 py-4 rounded-xl font-semibold hover:bg-slate-100 transition">
             Contact Us
           </button>
+          </Link>
 
         </div>
       </section>

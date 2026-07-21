@@ -1,7 +1,8 @@
-import { AdminComponent } from "../features/auth/components/AdminComponent";
+
+import AdminLoginComponent from "../features/auth/components/AdminLoginComponent";
 
 
 
 export function AdminPage() {
-    return <AdminComponent />;
+    return <AdminLoginComponent/>;
 }

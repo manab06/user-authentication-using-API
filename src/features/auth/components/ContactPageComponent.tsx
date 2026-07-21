@@ -1,6 +1,61 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { useForm } from "react-hook-form";
+// Comes from @hookform/resolvers
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Comes from your Zod schema file
+import {  contactUsSchemaZod, contactFormDatazod } from "../schema/contactUs";
+import { createContatctApi } from "../API/createContatctApi";
+import { useAuthStore } from "../store/store";
+import { toast } from "react-toastify";
+
+// Comes from your API file
+
+
+// Comes from your Zustand store
+
+
+
+
+
+
+
+
+
 
 export function ContactPageComponent () {
+   // contactFormDataFromZustandStore come from zustand store, which is used to update the state of the contact form data in the store.
+  const { contactFormDataFromZustandStore } = useAuthStore();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<contactFormDatazod>({
+    resolver: zodResolver(contactUsSchemaZod),
+  });
+
+  const onSubmit = async (data: contactFormDatazod)=>{
+    try{
+      const response= await createContatctApi(data);
+    contactFormDataFromZustandStore(
+      response.id,
+      response.email,
+      response.password,
+      response.name,
+      response.role,
+      response.avatar,
+      response.creationAt,
+      response.updatedAt
+    )
+    toast.success("Contact Form Submitted Successfully");
+    }catch(error:any){
+      console.log("Error in Contact Form Submission:", error.response?.data);
+      toast.error("Failed to submit contact form. Please try again.");
+    }
+  }
+
+
   return (
     <main className="min-h-screen w-full bg-gradient-to-br from-sky-50 via-white to-cyan-50">
 
@@ -94,64 +149,44 @@ export function ContactPageComponent () {
                 Send us a Message
               </h2>
 
-              <form className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-                <div>
-                  <label className="block mb-2 font-medium text-slate-700">
-                    Full Name
-                  </label>
+  <div>
+    <label className="block mb-2 font-medium text-slate-700">
+      Full Name
+    </label>
 
-                  <input
-                    type="text"
-                    placeholder="Enter your full name"
-                    className="w-full rounded-xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-cyan-500 outline-none"
-                  />
-                </div>
+    <input
+      type="text"
+      {...register("name")}
+      placeholder="Enter your full name"
+      className="w-full rounded-xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-cyan-500 outline-none"
+    />
+    <span>{errors.name?.message}</span>
+  </div>
 
-                <div>
-                  <label className="block mb-2 font-medium text-slate-700">
-                    Email
-                  </label>
+  <div>
+    <label className="block mb-2 font-medium text-slate-700">
+      Email
+    </label>
 
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full rounded-xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-cyan-500 outline-none"
-                  />
-                </div>
+    <input
+      type="email"
+      {...register("email")}
+      placeholder="Enter your email"
+      className="w-full rounded-xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-cyan-500 outline-none"
+    />
+    <span>{errors.email?.message}</span>
+  </div>
 
-                <div>
-                  <label className="block mb-2 font-medium text-slate-700">
-                    Subject
-                  </label>
+  <button
+    type="submit"
+    className="w-full rounded-xl bg-cyan-600 py-4 text-lg font-semibold text-white transition hover:bg-cyan-700"
+  >
+    Contect US
+  </button>
 
-                  <input
-                    type="text"
-                    placeholder="Subject"
-                    className="w-full rounded-xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-cyan-500 outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-2 font-medium text-slate-700">
-                    Message
-                  </label>
-
-                  <textarea
-                    rows={6}
-                    placeholder="Write your message..."
-                    className="w-full rounded-xl border border-gray-300 px-5 py-4 resize-none focus:ring-2 focus:ring-cyan-500 outline-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full rounded-xl bg-cyan-600 py-4 text-lg font-semibold text-white transition hover:bg-cyan-700"
-                >
-                  Send Message
-                </button>
-
-              </form>
+</form>
 
             </div>
 

@@ -1,35 +1,34 @@
 import { Button } from '../../../components/UI/button/Button';
+import { useAuthStore } from '../store/store';
+import {useState , useEffect} from 'react';
+import { ContactDetails } from '../API/getContactDetails';
+import { getContactDetails } from '../API/getContactDetails';
+import { Send } from 'lucide-react';
+import { EmailButton } from './EmailButton';
+// // - import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "motion/react";
 
 
 export default function AdminDashBoard() {
-  const users = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@gmail.com",
-      avatar:
-        "https://i.pravatar.cc/100?img=1",
-      role: "customer",
-    },
-    {
-      id: 2,
-      name: "Alex Smith",
-      email: "alex@gmail.com",
-      avatar:
-        "https://i.pravatar.cc/100?img=2",
-      role: "customer",
-    },
-    {
-      id: 3,
-      name: "Sara Khan",
-      email: "sara@gmail.com",
-      avatar:
-        "https://i.pravatar.cc/100?img=3",
-      role: "admin",
-    },
-  ];
+
+  const [users, setUsers ] = useState<ContactDetails[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const userDetails = await getContactDetails();
+        setUsers(userDetails); // Wrap the single user in an array
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    
+    fetchUsers();
+  }, []); 
+ 
 
   return (
+    <>
     <div className="min-h-screen bg-slate-100">
 
       {/* Header */}
@@ -72,7 +71,7 @@ export default function AdminDashBoard() {
             <h3 className="text-gray-500">Total Users</h3>
 
             <h1 className="text-4xl font-bold mt-2">
-              15
+              {users.length}
             </h1>
           </div>
 
@@ -88,7 +87,7 @@ export default function AdminDashBoard() {
             <h3 className="text-gray-500">Active Users</h3>
 
             <h1 className="text-4xl font-bold mt-2">
-              14
+              {users.length-1}
             </h1>
           </div>
 
@@ -98,7 +97,7 @@ export default function AdminDashBoard() {
             </h3>
 
             <h1 className="text-4xl font-bold mt-2">
-              3
+              {Math.floor(users.length - (users.length - 6))}
             </h1>
           </div>
 
@@ -115,6 +114,8 @@ export default function AdminDashBoard() {
             </h2>
 
           </div>
+           
+          
 
           <table className="w-full">
 
@@ -188,11 +189,10 @@ export default function AdminDashBoard() {
 
                     <div className="flex justify-center gap-3">
 
-                      <Button>
-                        Edit
-                      </Button>
+                      
 
-                      <Button>
+                     <EmailButton/>
+                     <Button>
                         Delete
                       </Button>
 
@@ -213,5 +213,6 @@ export default function AdminDashBoard() {
       </div>
 
     </div>
+    </>
   );
 }
