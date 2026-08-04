@@ -57,3 +57,28 @@ export interface contactFormDataType {
     updatedAt: string;
 }
 
+
+export interface Category {
+  id: number;
+  name: string;
+  image: string;
+}
+
+export interface GetProductDeatilsType {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: Category;
+}
+//dont send unnessecary data to api for update user profile, only send the data which is required to update the user profile, so I comment this
+export interface UpdateUserProfileData {
+  // id:number;
+  name:string;
+  email:string;
+  // password:null|string;
+  // role:null|string;
+  avatar:string;
+}
+

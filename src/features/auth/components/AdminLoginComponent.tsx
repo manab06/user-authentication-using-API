@@ -5,8 +5,6 @@ import { useAuthStore } from "../store/store";
 
 
 
-
-
 export default function AdminLoginComponent() {
     const navigate = useNavigate();
 
@@ -36,6 +34,8 @@ export default function AdminLoginComponent() {
         console.log("Email:", email);
         console.log("Password:", password);
     };
+
+
 
   return (
     <div className="min-h-screen flex bg-slate-100">
@@ -164,3 +164,5 @@ export default function AdminLoginComponent() {
     </div>
   );
 }
+
+

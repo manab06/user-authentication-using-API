@@ -21,6 +21,10 @@ export default function CartComponent() {
     0
   );
 
+  // const freeShiping = ()=>{
+  //   if(cart.price > 100 )
+  // }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-cyan-100 py-12 px-6">
       <div className="max-w-7xl mx-auto">
@@ -55,10 +59,11 @@ export default function CartComponent() {
             <p className="text-gray-500 mt-3">
               Looks like you haven't added anything yet.
             </p>
-
+           <Link to={"/products"}>
             <Button className="mt-8 bg-sky-600 text-white px-8 py-3 rounded-xl hover:bg-sky-700 transition">
               Shop Now
             </Button>
+            </Link>
           </div>
         ) : (
           <div className="grid lg:grid-cols-3 gap-8">
@@ -91,7 +96,7 @@ export default function CartComponent() {
                     <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
 
                       <span className="text-3xl font-bold text-sky-600">
-                        Rs-{item.price * 98}
+                         ${item.price}
                       </span>
 
                       <div className="flex items-center gap-3">
@@ -100,7 +105,7 @@ export default function CartComponent() {
                           onClick={() =>{ decreaseQuantity(item.id);
                                     toast.success("Item removed");
                           }}
-                          className="w-10 h-10 rounded-full bg-slate-200 hover:bg-slate-300 text-xl"
+                          className="w-10 h-10 rounded-full bg-red-200 hover:bg-slate-300 text-xl"
                         >
                           -
                         </Button>
@@ -147,12 +152,12 @@ export default function CartComponent() {
 
                 <div className="flex justify-between text-lg">
                   <span>Items</span>
-                  <span>{cart.length}</span>
+                  <span>{ cart.reduce((total, item) => total + item.quantity, 0)}</span>
                 </div>
 
                 <div className="flex justify-between text-lg">
                   <span>Shipping</span>
-                  <span className="text-green-600">FREE</span>
+                  <span className="text-green-600">{total > 100 ?"free":"$0.5 delevery charge"}</span>
                 </div>
 
                 <div className="flex justify-between text-lg">
@@ -165,7 +170,7 @@ export default function CartComponent() {
                 <div className="flex justify-between text-3xl font-bold">
                   <span>Total</span>
                   <span className="text-sky-600">
-                    Rs-{total + 20}
+                    ${total}
                   </span>
                 </div>
 

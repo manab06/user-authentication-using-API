@@ -19,6 +19,10 @@ interface CartStore {
   increaseQuantity: (id: number) => void;
 
   decreaseQuantity: (id: number) => void;
+
+//   sortBySearch:(product:CartItem)=> void;
+
+
 }
 
 export const useCartProductStore = create<CartStore>()(

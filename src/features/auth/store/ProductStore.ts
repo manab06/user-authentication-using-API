@@ -1,5 +1,5 @@
-import {create} from 'zustand'
-import {persist} from 'zustand/middleware'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface Category {
   id: number | null;
@@ -25,7 +25,7 @@ interface ProductState {
 export const useProductStore = create<ProductState>()(
   persist(
     (set) => ({
-      id: null,
+             id: null,
       title: null,
       slug: null,
       price: null,
@@ -44,6 +44,6 @@ export const useProductStore = create<ProductState>()(
     }),
     {
       name: "product-storage",
-    }
-  )
+    },
+  ),
 );

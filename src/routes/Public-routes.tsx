@@ -15,6 +15,7 @@ import AdminLoginComponent from "../features/auth/components/AdminLoginComponent
 import { ProductPage } from "../pages/ProductPage";
 import CartComponent from "../features/auth/components/CartComponent";
 import { LazyLodingForProductPage } from "../features/auth/components/LazyLodingForProductPage";
+import DetailAboutProduct_page from "../pages/DetailAboutProduct_page";
 
 
 
@@ -55,6 +56,11 @@ export const publicRoutes: RouteObject[] = [
       {
         path:"cart",
         element:<CartComponent/>
+
+      },
+      {
+        path:"/products/:id",
+        element:<DetailAboutProduct_page/>
 
       },
     ],
